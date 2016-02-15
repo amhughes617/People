@@ -34,7 +34,7 @@ public class People {
         }
         return personMap;
     }
-
+    //writes hashmap to a json
     static void writeJson(HashMap personMap) throws IOException { //writes a separate json file
         File f = new File("people.json");
         JsonSerializer serializer = new JsonSerializer();

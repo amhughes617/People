@@ -21,7 +21,17 @@ public class Person implements Comparable {
     @Override
     public int compareTo(Object o) {
         Person p = (Person) o;
-        return lastName.compareTo(p.lastName);
+        if (!p.lastName.equals(lastName)) {
+            return lastName.compareTo(p.lastName);
+        }
+        else {
+            return firstName.compareTo(p.firstName);
+        }
+    }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName + " from " + country;
     }
 
     public int getId() {
@@ -70,10 +80,5 @@ public class Person implements Comparable {
 
     public void setIpAddress(String ipAddress) {
         this.ipAddress = ipAddress;
-    }
-
-    @Override
-    public String toString() {
-        return firstName + " " + lastName + " from " + country;
     }
 }
