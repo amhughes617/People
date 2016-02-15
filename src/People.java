@@ -32,7 +32,6 @@ public class People {
             }
             personMap.get(person.country).add(person);
         }
-
         return personMap;
     }
 
