@@ -21,11 +21,11 @@ public class People {
         HashMap<String, ArrayList<Person>> personMap = new HashMap<>();
         File f = new File("people.csv");
         Scanner fileScanner = new Scanner(f);
-        String line = fileScanner.nextLine();
+        fileScanner.nextLine();
 
         while (fileScanner.hasNext()) {
-            line = fileScanner.nextLine();
-            String[] columns = line.split(",");
+
+            String[] columns = fileScanner.nextLine().split(",");       //liked all on one line better saw Branden's String[]
             Person person = new Person(Integer.valueOf(columns[0]), columns[1], columns[2], columns[3],columns[4],columns[5]);
             if (!personMap.containsKey(person.country)) {
                 personMap.put(person.country, new ArrayList<>());
