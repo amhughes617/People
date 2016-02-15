@@ -16,7 +16,7 @@ public class PeopleTest {
     }
 
     @Test
-    public void testSortLists() throws Exception {
+    public void testSortLists() throws Exception {  //checks if the sort method actually changes the hashmap
         HashMap personMap = People.readFile();
         HashMap personMap2 = People.readFile();
         People.sortLists(personMap);
