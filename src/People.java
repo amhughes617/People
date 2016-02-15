@@ -9,17 +9,23 @@ import java.util.*;
 public class People {
 
     public static void main(String[] args) throws IOException {
-        HashMap personMap = readFile();
-        System.out.println(personMap);
-        writeJson(personMap);
+        HashMap<String, ArrayList<Person>> personMap = readFile();
 
+        sortLists(personMap);
+        System.out.println(personMap);
+        System.out.println(personMap.keySet().size());
+        writeJson(personMap);
     }
+
+
     //reads csv file and saves into a HashMap, it sorts the person objects by last name in each arraylist of the hashmap
     public static HashMap<String, ArrayList<Person>> readFile() throws FileNotFoundException {
+
         HashMap<String, ArrayList<Person>> personMap = new HashMap<>();
         File f = new File("people.csv");
         Scanner fileScanner = new Scanner(f);
         String line = fileScanner.nextLine();
+
         while (fileScanner.hasNext()) {
             line = fileScanner.nextLine();
             String[] columns = line.split(",");
@@ -29,13 +35,20 @@ public class People {
             }
             personMap.get(person.country).add(person);
         }
+
+        return personMap;
+    }
+
+    //sorts ArrayLists by last name
+    static void sortLists(HashMap<String, ArrayList<Person>> personMap) {
         for (ArrayList<Person> persons : personMap.values()) {
             Collections.sort(persons);
         }
-        return personMap;
     }
+
     //writes hashmap to a json
     static void writeJson(HashMap personMap) throws IOException { //writes a separate json file
+
         File f = new File("people.json");
         JsonSerializer serializer = new JsonSerializer();
         String json = serializer.include("*").serialize(personMap);
@@ -44,8 +57,3 @@ public class People {
         fw.close();
     }
 }
-
-
-//for (ArrayList<Person> persons : personMap.values()) {
-//        Collections.sort(persons);
-//        }
