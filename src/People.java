@@ -1,18 +1,21 @@
+import jodd.json.JsonSerializer;
+
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class People {
 
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
         HashMap personMap = readFile();
-        for (ArrayList<Person> persons : personMap.values()) {
-            Collections.sort(persons);
-        }
         System.out.println(personMap);
-    }
+        writeJson(personMap);
 
-    public static HashMap<String, ArrayList<Person>> readFile() {
+    }
+    //reads csv file and saves into a HashMap, it sorts the person objects by last name in each arraylist of the hashmap
+    public static HashMap<String, ArrayList<Person>> readFile() throws FileNotFoundException {
         HashMap<String, ArrayList<Person>> personMap = new HashMap<>();
         File f = new File("people.csv");
         Scanner fileScanner = new Scanner(f);
@@ -26,7 +29,19 @@ public class People {
             }
             personMap.get(person.country).add(person);
         }
+        for (ArrayList<Person> persons : personMap.values()) {
+            Collections.sort(persons);
+        }
         return personMap;
+    }
+
+    static void writeJson(HashMap personMap) throws IOException { //writes a separate json file
+        File f = new File("people.json");
+        JsonSerializer serializer = new JsonSerializer();
+        String json = serializer.include("*").serialize(personMap);
+        FileWriter fw = new FileWriter(f);
+        fw.write(json);
+        fw.close();
     }
 }
 
