@@ -43,6 +43,7 @@ public class People {
     static void sortLists(HashMap<String, ArrayList<Person>> personMap) {
         for (ArrayList<Person> persons : personMap.values()) {
             Collections.sort(persons);
+            //personMap.values().forEach(Collections::sort); does the whole for loop and sorts at once
         }
     }
 
