@@ -1,5 +1,4 @@
 import jodd.json.JsonSerializer;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -10,13 +9,11 @@ public class People {
 
     public static void main(String[] args) throws IOException {
         HashMap<String, ArrayList<Person>> personMap = readFile();
-
         sortLists(personMap);
         System.out.println(personMap);
         System.out.println(personMap.keySet().size());
         writeJson(personMap);
     }
-
 
     //reads csv file and saves into a HashMap, it sorts the person objects by last name in each arraylist of the hashmap
     public static HashMap<String, ArrayList<Person>> readFile() throws FileNotFoundException {
